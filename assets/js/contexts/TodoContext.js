@@ -7,19 +7,20 @@ class TodoContextProvider extends Component {
         super(props);
         this.state = {
             todos: [
-                {task: 'do something'},
-                {task: 'do something'},
-                {task: 'do something'},
-                {task: 'do something'},
-                {task: 'do something'},
-                {task: 'do something'}
+                {name: 'do something'},
                 ]
         };
     }
 
     //create
-    createTodo(){
-
+    createTodo(e,todo){
+        e.preventDefault();
+        let data = [...this.state.todos];
+        data.push(todo);
+        this.setState(
+            {todos: data}
+        );
+        
     }
 
     //read
