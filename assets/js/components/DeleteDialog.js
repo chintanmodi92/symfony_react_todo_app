@@ -18,7 +18,7 @@ function DeleteDialog(props) {
            </DialogContent>
            <DialogActions>
                <Button onClick={hide}>Cancel</Button>
-               <Button onClick={hide}>Delete</Button>
+
            </DialogActions>
        </Dialog>
     );
