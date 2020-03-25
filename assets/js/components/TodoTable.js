@@ -61,12 +61,16 @@ function TodoTable() {
                                 todo.name}
                         </TableCell>
                         <TableCell align="right">
-                            <IconButton onClick={()=>{setEditIsShown(todo.id); setEditTodo(todo.name)}}>
+                            <div onClick={()=>{setEditIsShown(todo.id); setEditTodo(todo.name)}}>
+                            <IconButton>
                                 <EditIcon/>
                             </IconButton>
+                            </div>
+                            <div onClick={()=>{setDeleteConfirmationIsShown(true); setTodoToBeDeleted(todo)}}>
                             <IconButton>
-                                <DeleteIcon onClick={()=>{setDeleteConfirmationIsShown(true); setTodoToBeDeleted(todo)}}/>
+                                <DeleteIcon />
                             </IconButton>
+                            </div>
                         </TableCell>
                     </TableRow>
                 ))

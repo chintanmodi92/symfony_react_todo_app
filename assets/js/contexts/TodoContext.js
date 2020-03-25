@@ -29,15 +29,15 @@ class TodoContextProvider extends Component {
     }
 
     //delete
-    deleteTodo(){
+    deleteTodo(data){
         let todos = [...this.state.todos]
         console.log(todos)
-        // let todo = todos.find(todo=> todo.id===data.id)
-        // todos.splice(todos.indexOf(todo), 1)
-        // console.log(todo)
-        // this.setState({
-        //     todos: todos
-        // })
+        let todo = todos.find(todo=> todo.id===data.id)
+        todos.splice(todos.indexOf(todo), 1)
+        console.log(todo)
+        this.setState({
+            todos: todos
+        })
     }
 
     //update
