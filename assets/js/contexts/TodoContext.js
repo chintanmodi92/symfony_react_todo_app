@@ -15,12 +15,17 @@ class TodoContextProvider extends Component {
     //create
     createTodo(e,todo){
         e.preventDefault();
-        let data = [...this.state.todos];
-        data.push(todo);
-        this.setState(
-            {todos: data}
-        );
-
+        axios.post('/api/todo/create', todo)
+            .then(response=>{
+                console.log(todo);
+                let data = [...this.state.todos];
+                data.push(response.data.todo);
+                this.setState({
+                    todos: data
+                })
+            }).catch(err=>{
+                console.log(err);
+        })
     }
 
     //read
@@ -35,28 +40,42 @@ class TodoContextProvider extends Component {
 
     //delete
     deleteTodo(data){
-        let todos = [...this.state.todos]
-        console.log(todos)
-        let todo = todos.find(todo=> todo.id===data.id)
-        todos.splice(todos.indexOf(todo), 1)
-        console.log(todo)
-        this.setState({
-            todos: todos
-        })
+        axios.delete('/api/todo/delete/' + data.id, data)
+            .then(
+                response=>{
+                    let todos = [...this.state.todos]
+                    console.log(todos)
+                    let todo = todos.find(todo=> todo.id===data.id)
+                    todos.splice(todos.indexOf(todo), 1)
+                    console.log(todo)
+                    this.setState({
+                        todos: todos
+                    })
+                }
+            ).catch(
+                err=> console.log(err)
+        )
     }
 
     //update
     updateTodo(data){
-        console.log(true)
-        let todos = [...this.state.todos]
-        let todo = todos.find(todo=>{
-            return todo.id === data.id;
-        })
+        axios.put('/api/todo/update/' + data.id, data)
+            .then(
+                response => {
+                    let todos = [...this.state.todos]
+                    let todo = todos.find(todo=>{
+                        return todo.id === data.id;
+                    })
 
-        todo.name = data.name;
-        this.setState({
-            todos: todos
-        })
+                    todo.name = data.name;
+                    this.setState({
+                        todos: todos
+                    })
+                }
+            ) .catch(
+                err=> console.log(err)
+        )
+
     }
 
 
